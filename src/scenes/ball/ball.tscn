@@ -11,6 +11,9 @@ material = SubResource("StandardMaterial3D_rvp4u")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5tfel"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_det6r"]
+radius = 6.0
+
 [node name="Ball" type="RigidBody3D" unique_id=616651405]
 collision_layer = 4
 collision_mask = 7
@@ -38,3 +41,11 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 billboard = 2
 text = "Owner ID"
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=1824532168]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=771616899]
+shape = SubResource("SphereShape3D_det6r")
