@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b5tqrepo4d4xx"]
+
+[ext_resource type="Script" uid="uid://y7qoinjfht7g" path="res://src/scenes/ball/ball.gd" id="1_e76wg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qntj4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5tfel"]
+
+[node name="Ball" type="RigidBody3D" unique_id=616651405]
+script = ExtResource("1_e76wg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=607577318]
+mesh = SubResource("SphereMesh_qntj4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=932849360]
+shape = SubResource("SphereShape3D_5tfel")
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=1390638036]
+owner_mode = 2
+root_interpolation_mode = 2
+unique_name_in_owner = true
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
+[node name="LabelOwner" type="Label3D" parent="." unique_id=806758286]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+billboard = 2
+text = "Owner ID"

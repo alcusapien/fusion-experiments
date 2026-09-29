@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://8e1juok788f7"]
+
+[ext_resource type="Script" uid="uid://bsffoxiuphsb0" path="res://src/scenes/player/player.gd" id="1_swhsd"]
+[ext_resource type="Texture2D" uid="uid://b0nin45qu6l6u" path="res://assets/textures/hud/crosshair.png" id="2_qopur"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5tfel"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qntj4"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1034962830]
+script = ExtResource("1_swhsd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1827383668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_5tfel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=906438143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_qntj4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1621190148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="Crosshair" type="TextureRect" parent="Camera3D" unique_id=845325801]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(25, 25)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_qopur")
+
+[node name="Reach" type="RayCast3D" parent="Camera3D" unique_id=97420277]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -4)
+
+[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=589334842]
+owner_mode = 1
+unique_name_in_owner = true
+process_priority = -2147483647
+process_physics_priority = -2147483647
+
+[node name="LabelOwner" type="Label3D" parent="." unique_id=253229976]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+billboard = 2
+text = "Owner ID"
