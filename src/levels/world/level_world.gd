@@ -53,5 +53,5 @@ func _on_connection_failed(error: String) -> void:
 
 func _pre_spawn_player(_replicator: Variant, player: Player) -> void:
     var player_id: int = Fusion.get_local_player_id()
-    player.position = Vector3.ZERO if player_id == 1 else Vector3(0, 0, -10)
+    player.position = Vector3.ZERO if player_id == 1 else Vector3(0, 0, -6)
     player.rotation = Vector3.ZERO if player_id == 1 else Vector3.UP * deg_to_rad(180)

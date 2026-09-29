@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://0olpl1j2usr3" path="res://src/levels/world/level_world.gd" id="1_qwvw8"]
 [ext_resource type="Texture2D" uid="uid://dswi7vvmu0tca" path="res://assets/textures/grids/grid_dark.png" id="2_x3828"]
 [ext_resource type="PackedScene" uid="uid://b5tqrepo4d4xx" path="res://src/scenes/ball/ball.tscn" id="3_67pvf"]
+[ext_resource type="Texture2D" uid="uid://dj6bdwt8jqgly" path="res://assets/textures/grids/grid_orange.png" id="3_x3828"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j7tlc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,6 +30,26 @@ size = Vector3(25, 1, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oe4vh"]
 size = Vector3(25, 1, 25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67pvf"]
+albedo_texture = ExtResource("3_x3828")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_offset = Vector3(0.125, 0.125, 0.125)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tfel"]
+material = SubResource("StandardMaterial3D_67pvf")
+size = Vector3(1, 1, 11)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qntj4"]
+size = Vector3(1, 1, 11)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x3828"]
+material = SubResource("StandardMaterial3D_67pvf")
+size = Vector3(1, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67pvf"]
+size = Vector3(1, 1, 5)
+
 [node name="LevelWorld" type="Node3D" unique_id=1711770910]
 script = ExtResource("1_qwvw8")
 
@@ -52,6 +73,60 @@ mesh = SubResource("BoxMesh_537ft")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_oe4vh")
 
+[node name="Walls" type="Node3D" parent="." unique_id=732992460]
+
+[node name="Wall" type="StaticBody3D" parent="Walls" unique_id=1855675741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall" unique_id=3132885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_5tfel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall" unique_id=120886654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_qntj4")
+
+[node name="Wall2" type="StaticBody3D" parent="Walls" unique_id=862137670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall2" unique_id=1035630613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_5tfel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2" unique_id=407649060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_qntj4")
+
+[node name="Wall3" type="StaticBody3D" parent="Walls" unique_id=456008750]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -6)
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall3" unique_id=365214204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_x3828")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3" unique_id=742127853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_67pvf")
+
+[node name="Wall4" type="StaticBody3D" parent="Walls" unique_id=1566468798]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 6)
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall4" unique_id=1121904405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_x3828")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4" unique_id=927083199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_67pvf")
+
 [node name="Players" type="Node3D" parent="." unique_id=193562226]
 unique_name_in_owner = true
 
@@ -60,5 +135,5 @@ spawn_path = NodePath("../Players")
 unique_name_in_owner = true
 
 [node name="Ball" parent="." unique_id=616651405 groups=["balls"] instance=ExtResource("3_67pvf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
 metadata/_edit_group_ = true
