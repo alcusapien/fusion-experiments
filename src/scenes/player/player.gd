@@ -4,6 +4,7 @@ extends CharacterBody3D
 
 const MOUSE_SENSITIVITY: float = 0.001
 const MAX_PITCH: float = 1.5
+const PUSH_STRENGTH: float = 10.0
 
 @export var move_speed: float = 5.0
 @export var jump_speed: float = 5.5
@@ -11,6 +12,7 @@ const MAX_PITCH: float = 1.5
 
 @onready var replicator: FusionSharedReplicator = %FusionSharedReplicator
 @onready var camera: Camera3D = %Camera3D
+@onready var reach: RayCast3D = %Reach
 @onready var mesh: MeshInstance3D = %MeshInstance3D
 @onready var label_owner: Label3D = %LabelOwner
 
@@ -38,6 +40,11 @@ func _physics_process(delta: float) -> void:
     # Handle jump
     if Input.is_action_just_pressed("move_jump") and is_on_floor():
         velocity.y = jump_speed
+
+    # Push the ball being looked at
+    var ball: Ball = _get_detected_ball()
+    if Input.is_action_just_pressed("primary") and ball:
+        ball.push(-camera.global_transform.basis.z * PUSH_STRENGTH)
 
     # Calculate movement direction
     var input_dir: Vector2 = Input.get_vector(
@@ -85,3 +92,12 @@ func _on_authority_changed(has_authority: bool) -> void:
     camera.current = has_authority
     if has_authority:
         Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+# PRIVATE METHODS
+
+func _get_detected_ball() -> Ball:
+    if not reach.is_colliding():
+        return null
+
+    return reach.get_collider() as Ball
