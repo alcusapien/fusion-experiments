@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bjn8mv1shrmw1"]
+
+[ext_resource type="Script" uid="uid://0olpl1j2usr3" path="res://src/levels/world/level_world.gd" id="1_qwvw8"]
+[ext_resource type="Texture2D" uid="uid://dswi7vvmu0tca" path="res://assets/textures/grids/grid_dark.png" id="2_x3828"]
+[ext_resource type="PackedScene" uid="uid://b5tqrepo4d4xx" path="res://src/scenes/ball/ball.tscn" id="3_67pvf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j7tlc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5q4o7"]
+sky_material = SubResource("ProceduralSkyMaterial_j7tlc")
+
+[sub_resource type="Environment" id="Environment_ahnlg"]
+background_mode = 2
+sky = SubResource("Sky_5q4o7")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eewff"]
+albedo_texture = ExtResource("2_x3828")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_offset = Vector3(0.125, 0.125, 0.125)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_537ft"]
+material = SubResource("StandardMaterial3D_eewff")
+size = Vector3(25, 1, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oe4vh"]
+size = Vector3(25, 1, 25)
+
+[node name="LevelWorld" type="Node3D" unique_id=1711770910]
+script = ExtResource("1_qwvw8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2052170397]
+environment = SubResource("Environment_ahnlg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2088271852]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1799708487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2145904070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_537ft")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=417114961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_oe4vh")
+
+[node name="Players" type="Node3D" parent="." unique_id=193562226]
+unique_name_in_owner = true
+
+[node name="SpawnerPlayers" type="FusionSpawner" parent="." unique_id=721134374]
+spawn_path = NodePath("../Players")
+unique_name_in_owner = true
+
+[node name="Ball" parent="." unique_id=616651405 groups=["balls"] instance=ExtResource("3_67pvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4)
+metadata/_edit_group_ = true

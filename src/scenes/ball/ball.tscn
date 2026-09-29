@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://b5tqrepo4d4xx"]
 
 [ext_resource type="Script" uid="uid://y7qoinjfht7g" path="res://src/scenes/ball/ball.gd" id="1_e76wg"]
+[ext_resource type="Texture2D" uid="uid://dt1m30qm6vlp8" path="res://assets/textures/grids/grid_green.png" id="2_sm1nb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvp4u"]
+albedo_texture = ExtResource("2_sm1nb")
 
 [sub_resource type="SphereMesh" id="SphereMesh_qntj4"]
+material = SubResource("StandardMaterial3D_rvp4u")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5tfel"]
 
 [node name="Ball" type="RigidBody3D" unique_id=616651405]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_e76wg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=607577318]
