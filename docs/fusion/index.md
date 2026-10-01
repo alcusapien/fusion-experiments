@@ -1,0 +1,33 @@
+# FUSION (GODOT) Fusion 3 Godot Client — Documentation Package
+
+> Markdown export of the FUSION (GODOT) Fusion 3 Godot Client documentation from https://dev-doc.photonengine.com/fusion-godot/v3-client-server/ (en-us). The list below mirrors the documentation navigation; links point at the Markdown files in this package. Links to pages outside this package are absolute URLs into the online documentation.
+- [Fusion Introduction](fusion-intro.md)
+- **Getting Started**
+  - [SDK & Download](getting-started/sdk-download.md)
+  - [Choose Topology](getting-started/choose-topology.md)
+  - [Quick Start Guide](getting-started/quick-start-guide.md)
+  - [Release Notes](getting-started/release-notes.md)
+  - [Get Help](getting-started/get-help.md)
+- **Manual**
+  - [Connection](manual/connection.md)
+  - **Replication**
+    - [Syncing Properties](manual/replication/syncing-properties.md)
+    - [Prediction And Input](manual/replication/prediction-and-input.md)
+  - [Spawning](manual/spawning.md)
+  - **Remote Procedure Calls**
+    - [Basics](manual/rpcs/basics.md)
+    - [Example Uses](manual/rpcs/example-uses.md)
+  - [Interest Area](manual/interest-area.md)
+  - [Physics Replication](manual/physics-replication.md)
+  - [Large Scenes](manual/large-scenes.md)
+  - [C# Bindings](manual/csharp-bindings.md)
+- **Consoles**
+  - [Overview](consoles/overview.md)
+- **Gaming Circle**
+  - [Samples Overview](https://www.photonengine.com/samples)
+  - [Photon Circle Discord](gaming-circle/circle-discord.md)
+- **Reference**
+  - [Glossary](reference/glossary.md)
+  - [Open Source Software at Photon](reference/open-source-software.md)
+  - [Photon Application Analytics](reference/counter-analytics.md)
+  - [Regions](reference/regions.md)
