@@ -29,6 +29,10 @@ gdscript/warnings/missing_await=1
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[fusion]
+
+simulation/mode=1
+
 [input]
 
 move_left={

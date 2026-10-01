@@ -10,15 +10,6 @@ albedo_texture = ExtResource("2_n52bt")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5tfel"]
 material = SubResource("StandardMaterial3D_cx3ie")
 
-[sub_resource type="FusionReplicationConfig" id="FusionReplicationConfig_mv7k2"]
-property_count = 1
-properties/0/path = NodePath("Camera3D:rotation")
-properties/0/max_array_capacity = 0
-properties/0/interface_tag = ""
-properties/0/interpolate = 1
-properties/0/element_type = 0
-properties/0/element_class_name = ""
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qntj4"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1034962830]
@@ -62,9 +53,8 @@ unique_name_in_owner = true
 target_position = Vector3(0, 0, -4)
 collision_mask = 4
 
-[node name="FusionSharedReplicator" type="FusionSharedReplicator" parent="." unique_id=589334842]
-owner_mode = 1
-replication_config = SubResource("FusionReplicationConfig_mv7k2")
+[node name="FusionServerReplicator" type="FusionServerReplicator" parent="." unique_id=589334842]
+owner_mode = 5
 root_replication_mode = 1
 unique_name_in_owner = true
 process_priority = -2147483647
