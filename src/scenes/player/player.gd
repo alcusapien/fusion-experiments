@@ -20,6 +20,7 @@ const FLAG_PUSH: int = 2
 @onready var reach: RayCast3D = %Reach
 @onready var mesh: MeshInstance3D = %MeshInstance3D
 @onready var label_owner: Label3D = %LabelOwner
+@onready var debug_label: Label = %DebugLabel
 
 # Kept apart from the replicated rotation, which lags behind and would undo mouse look
 var _look_yaw: float = 0.0
@@ -38,6 +39,13 @@ func _ready() -> void:
 
     # Avoid a visible streak from the origin to the spawn position
     reset_physics_interpolation()
+
+
+func _process(_delta: float) -> void:
+    if not debug_label.visible:
+        return
+
+    debug_label.text = _debug_text()
 
 
 func _physics_process(delta: float) -> void:
@@ -74,12 +82,14 @@ func _on_authority_changed(has_input_authority: bool) -> void:
     # The local camera sits inside the capsule, so hide our own body
     mesh.visible = not has_input_authority
     camera.current = has_input_authority
+    # Only the local player should draw an overlay
+    debug_label.visible = has_input_authority
     if has_input_authority:
         Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_process_input(
-    _tick: int, delta_time: float, payload: PackedByteArray, _is_new: bool
+    _tick: int, delta_time: float, payload: PackedByteArray, is_new: bool
 ) -> void:
     var input_dir: Vector2 = Vector2(payload.decode_float(0), payload.decode_float(4))
     var flags: int = payload.decode_u8(16)
@@ -146,3 +156,19 @@ func _get_detected_ball() -> Ball:
         return null
 
     return reach.get_collider() as Ball
+
+
+func _debug_text() -> String:
+    var lines: PackedStringArray = [
+        "fps        %d" % Engine.get_frames_per_second(),
+        "rtt        %d ms" % roundi(Fusion.get_rtt() * 1000.0),
+        "role       %s" % ("host" if Fusion.is_master_client() else "client"),
+        "input auth %d" % replicator.get_input_authority(),
+        "queue      %d" % replicator.get_input_queue_count(),
+        "position   %.2v" % global_position,
+        "velocity   %.2v" % velocity,
+        "speed      %.2f" % velocity.length(),
+        "on_floor   %s" % is_on_floor(),
+        "yaw/pitch  %.2f / %.2f" % [_look_yaw, camera.rotation.x],
+    ]
+    return "\n".join(lines)
